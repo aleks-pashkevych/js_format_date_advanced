@@ -13,9 +13,9 @@ function formatDate(date, fromFormat, toFormat) {
   const outputDivider = toFormat[3];
   const dateArr = date.split(initialDivider);
   const outputArr = [];
-  let day = -10;
-  let month = -10;
-  let year = -10;
+  let day = null;
+  let month = null;
+  let year = null;
 
   for (let i = 0; i < dateArr.length; i++) {
     switch (fromFormat[i]) {
@@ -29,7 +29,7 @@ function formatDate(date, fromFormat, toFormat) {
         year = '' + dateArr[i];
         break;
       case 'YY':
-        year = yearGenetate(dateArr[i]);
+        year = yearGenerate(dateArr[i]);
         break;
     }
   }
@@ -41,8 +41,8 @@ function formatDate(date, fromFormat, toFormat) {
       outputArr[i] = month;
     } else if (toFormat[i] === 'YYYY') {
       outputArr[i] = year;
-    } else if (toFormat[i] === 'YY') {
-      outputArr[i] = year[2] + year[3];
+    } else {
+      outputArr[i] = year.slice(-2);
     }
   }
 
@@ -51,7 +51,7 @@ function formatDate(date, fromFormat, toFormat) {
   return rez;
 }
 
-function yearGenetate(value) {
+function yearGenerate(value) {
   if (value < 30) {
     return `20${value}`;
   }
